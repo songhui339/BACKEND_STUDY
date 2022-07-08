@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Directive Tag</title>
-</head>
-<body>
-	<h1>지시자 태그</h1>
-	
+<%@ include file="/views/common/header.jsp" %>
 	<section>
 		<h2>개인 정보 입력</h2>
 	
@@ -35,5 +27,4 @@
 		</form>
 	</section>
 
-</body>
-</html>
+	<%@ include file="/views/common/footer.jsp" %>

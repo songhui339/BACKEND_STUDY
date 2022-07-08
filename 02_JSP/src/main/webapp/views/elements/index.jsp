@@ -24,6 +24,7 @@
 	<%-- 스크립트릿(Scriptlet) 태그 --%>
 	<%
 		int sum = 0;
+		// int sum = 0 / 10;
 	
 		for(int i = 1; i <= 10; i++){
 			sum += i;
