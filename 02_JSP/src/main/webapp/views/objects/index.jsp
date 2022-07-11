@@ -115,10 +115,18 @@
 	
 	<a href="redirect.jsp">Redirect 테스트 >></a>
 	
+	<br><br><hr>
+	<h2>3. pageContext</h2>
+	<p>JSP와 관련된 다른 내장 객체를 얻어내거나 현재 페이지의 요청과 응답의 제어권을 다른 페이지로 넘겨주는데 사용하는 객체</p>
 	
+	<h3>1) Forward</h3>
+	<p>
+		forward(String url); <br>
+		매개값으로 지정한 URL로 요청과 응답에 관한 제어권을 영구적으로 넘긴다.<br>
+		Forward 방식은 현재 페이지의 요청과 응답 정보를 다른 페이지로 넘기기 때문에 요청 정보와 응답 정보가 유지된다 
+	</p>
 	
-	
-	
+	<a href="forward.jsp">Forward 테스트 >></a>
 	
 	
 	
