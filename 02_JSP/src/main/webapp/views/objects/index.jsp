@@ -44,7 +44,7 @@
 	</table>
 	
 	
-	<h3>2) URL/URLI, 요청 방식과 관련된 메소드</h3>
+	<h3>2) URL/URI, 요청 방식과 관련된 메소드</h3>
 	<table border="1">
 		<tr>
 			<th>이름</th>
