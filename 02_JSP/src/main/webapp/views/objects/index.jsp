@@ -152,6 +152,24 @@
 	<p>최종 접속 시간 : <%= new Date(session.getLastAccessedTime()) %></p>
 	<p></p>
 	
+	<br><hr>
+	<h2>5. Application 객체</h2>
+	<p>웹 애플리케이션(컨텍스트)의 실행 환경을 제공하는 서버의 정보와 서버 측 자원에 대 한 정보를 저장하고 있는 객체</p>
+	
+	<table border="1">
+		<tr>
+			<td>JSP 버전</td>
+			<td><%= application.getMajorVersion() %>.<%= application.getMinorVersion() %></td>
+		</tr>
+		<tr>
+			<td>컨테이너 정보</td>
+			<td><%= application.getServerInfo() %></td>
+		</tr>
+		<tr>
+			<td>웹 애플리키에션의 실제 파일시스템 경로</td>
+			<td><%= application.getRealPath("/") %></td>
+		</tr>
+	</table>
 	
 	
 	
