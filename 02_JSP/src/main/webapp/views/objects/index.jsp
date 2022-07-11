@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@page import="java.util.Enumeration"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
@@ -113,7 +114,7 @@
 		리다이렉트 방식은 요청과 응답 객체를 새로 생성하므로 이전 요청과 응답 정보가 유지되지 않는다.
 	</p>
 	
-	<a href="redirect.jsp">Redirect 테스트 >></a>
+	<a href="redirect.jsp" target="_blank">Redirect 테스트 >></a>
 	
 	<br><br><hr>
 	<h2>3. pageContext</h2>
@@ -126,8 +127,30 @@
 		Forward 방식은 현재 페이지의 요청과 응답 정보를 다른 페이지로 넘기기 때문에 요청 정보와 응답 정보가 유지된다 
 	</p>
 	
-	<a href="forward.jsp">Forward 테스트 >></a>
+	<a href="forward.jsp" target="_blank">Forward 테스트 >></a>
 	
+	<h2>4. session 객체</h2>
+	
+	<p>웹 브라우저의 정보를 유지하기 위한 세션 정보를 저장하고 있는 객체</p>
+	
+	<%
+		Cookie cookie = new Cookie("userId", "sh.choi");
+	
+		cookie.setMaxAge(10);
+	
+		response.addCookie(cookie);
+		
+		// 세션을 지정한 후 클라이언트로 부터 요청이 없으면 세션 새로고침 하는 것 
+		session.setMaxInactiveInterval(10);
+	
+	%>
+	
+	
+	<p>세션 ID : <%= session.getId() %></p>
+	<p>isNew : <%= session.isNew() %></p>
+	<p>생성 시간 : <%= new Date(session.getCreationTime()) %></p>
+	<p>최종 접속 시간 : <%= new Date(session.getLastAccessedTime()) %></p>
+	<p></p>
 	
 	
 	
