@@ -38,9 +38,23 @@
 	
 	<h3>3) EL 연산자</h3>
 	
+	<a href="${ pageContext.request.contextPath }/views/el/elOperators.jsp">View Details >></a>
 	
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br>
 </body>
 </html>

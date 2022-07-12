@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-//@Data
-@Getter
+@Data
+//@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
