@@ -18,7 +18,7 @@
 	
 	<h3>1) EL</h3>
 	
-	<a href="el.do" target="_blank">View Details >></a>
+	<a href="el.do">View Details >></a>
 	
 	
 	
