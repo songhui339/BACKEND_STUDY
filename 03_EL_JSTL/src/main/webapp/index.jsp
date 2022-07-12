@@ -20,6 +20,25 @@
 	
 	<a href="el.do">View Details >></a>
 	
+	<h3>2) EL(Param) - 파라미터 처리</h3>
+	<!-- action="/03_EL_JSTL/views/el/elParam.jsp -->
+	<form action="${ pageContext.request.contextPath }/views/el/elParam.jsp" method="GET">
+		<fieldset>
+			<legend>제품 입력</legend>
+			<input type="text" name="pName" placeholder="제품명을 입력하세요."><br><br>
+			<input type="number" name="pCount" placeholder="수량을 입력하세요."><br><br>
+			<input type="text" name="option" placeholder="옵션을 입력하세요."><br><br>
+			<input type="text" name="option" placeholder="옵션을 입력하세요."><br><br>
+			
+			<input type="submit" value="전송">
+			
+		</fieldset>
+	
+	</form>
+	
+	<h3>3) EL 연산자</h3>
+	
+	
 	
 	
 	
