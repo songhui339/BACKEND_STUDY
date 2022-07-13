@@ -41,6 +41,32 @@
 	<a href="${ pageContext.request.contextPath }/views/el/elOperators.jsp">View Details >></a>
 	
 	
+	<h2>2. JSP 액션 태그</h2>
+	<p>
+		- JSP 페이지에서 자바 코드를 직접 입력하지 않고 특정 작업을 수행하는데 사용하는 태그이다.
+		- 액션 태그의 경우 웹 브라우저에서 실행되는 것이 아니라 웹 컨테이너에서 실행된다.
+	</p>
+	
+	<h3>1) 표준 액션 태그</h3>
+	<p>
+		JSP에서 기본으로 제공하는 태그 액션 태그로 별도의 라이브러리 설치 없이 바로 사용할 수 있다.
+	</p>
+	
+	<a href="${ pageContext.request.contextPath }/views/actiontag/standard/include.jsp">jsp:include >></a>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
