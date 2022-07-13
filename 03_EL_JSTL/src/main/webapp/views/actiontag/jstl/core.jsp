@@ -153,20 +153,35 @@
 				<td>${ student.english }</td>
 			</tr>
 		</c:forEach>
-		
-		
-		
-		
 	</table>
 	
 	
+	<h4>2) c:forTokens 태그</h4>
+	<p>문자열에 포함된 구분자를 통해 토큰을 분리해 반복을 수행하는 태그</p>
 	
+	<ul>
+		<c:forTokens var="device" items="컴퓨터,노트북,핸드폰,에어컨/TV,냉장고.세탁기" delims=",/.">
+			<li>${ device }</li>
+		</c:forTokens>
+	</ul>
 	
+	<ul style="width: 50%;">
+		<c:forTokens var="color" items="pink aqua tomato yellow lime" delims=" ">
+			<li style="background-color: ${ color };">${ color }</li>
+		</c:forTokens>
+	</ul>
 	
+	<h3>4. c:url 태그</h3>
+	<p>URL을 생성하고 쿼리 스트링을 미리 설정하는 태그</p>
 	
+	<c:url var="url" value="/views/el/elParam.jsp" context="/01_Servlet">
+		<c:param name="pName" value="갤럭시Z플립3" />
+		<c:param name="pCount" value="2" />
+		<c:param name="option" value="퍼플" />
+		<c:param name="option" value="128GB" />
+	</c:url>
 	
-	
-	
+	<a href="${ url }">이동 >></a>
 	
 	
 	
