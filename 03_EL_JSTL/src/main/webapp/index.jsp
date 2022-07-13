@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,10 +59,17 @@
 	<p><a href="${ pageContext.request.contextPath }/views/actiontag/standard/include.jsp">jsp:include >></a></p>
 	<p><a href="${ pageContext.request.contextPath }/views/actiontag/standard/forward.jsp">jsp:forward >></a></p>
 	
+	<h3>2) JSTL(JSP Standard Tag Library)</h3>
+	<p>
+		JSP 페이지에서 자주 사용하는 코드들을 사용하기 쉽게 태그로 만들어 표준으로 제공한다.
+	</p>
 	
+	<h4>2-1) JSTL Core Tags</h4>
+	<p>
+		변수와 URL, 조건문, 반복문 등의 로직관 관련된 액션 태그를 제공한다.
+	</p>
 	
-	
-	
+	<a href="${ pageContext.request.contextPath }/views/actiontag/jstl/core.jsp">View Details >></a>
 	
 	
 	
