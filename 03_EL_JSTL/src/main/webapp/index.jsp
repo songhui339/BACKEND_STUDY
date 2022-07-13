@@ -52,7 +52,8 @@
 		JSP에서 기본으로 제공하는 태그 액션 태그로 별도의 라이브러리 설치 없이 바로 사용할 수 있다.
 	</p>
 	
-	<a href="${ pageContext.request.contextPath }/views/actiontag/standard/include.jsp">jsp:include >></a>
+	<p><a href="${ pageContext.request.contextPath }/views/actiontag/standard/include.jsp">jsp:include >></a></p>
+	<p><a href="${ pageContext.request.contextPath }/views/actiontag/standard/forward.jsp">jsp:forward >></a></p>
 	
 	
 	
