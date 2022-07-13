@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.el.model.vo.Student"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -17,7 +20,7 @@
 	<p>변수를 선언하고 초기 값을 대입하는 태그</p>
 	
 	<!-- 브라우저가 아닌 컨테이너에서 처리! -->
-	<c:set var="number1" value="10" />
+	<c:set var="number1" value="99" />
 	<c:set var="number2" value="20" scope="request" />
 	<c:set var="result" value="${ number1 + number2 }" scope="session" />
 	<c:set var="array">
@@ -72,16 +75,89 @@
 		<b>number1이 number2보다 작다고 한다~</b> <!-- true이므로 보인다! -->
 	</c:if>
 	
+	<!-- ------------------------------ -->
+	
+	<h4>2) c:choose 태그</h4>
+	<p>
+		- 자바의 switch 구문과 같은 역할을 하는 태그이다.<br>
+		- 하위 태그인 c:when, c:otherwise 태그와 함께 사용되는데, 각각 switch 구문의 case, default 절과 비슷한 역할을 한다.
+	</p>
 	
 	
+	<c:choose>
+		<c:when test="${ number1 > number2 }">
+			<b>number1이 number2보다 크다고한다~</b>
+		</c:when>
+		<c:when test="${ number1 < number2 }">
+			<b>number1이 number2보다 작다고 한다~</b>
+		</c:when>
+		
+		<c:otherwise>
+			<b>number1이 number2보다 크거나 작지 않다</b>
+		</c:otherwise>
+		
+	</c:choose>
 	
+	<!-- ------------------------------ -->
 	
+	<h3>3. 반복문</h3>
+	<h4>1) c:forEach 태그</h4>
 	
+	<p>자바의 for 구문에 해당하는 역할을 하는 태그</p>
 	
+	<!-- 자바의 for 구문처럼 사용하기 -->
+	<c:forEach var="i" begin="1" end="6" step="2">
+		<h${ i }>반복 확인 : ${ i }</h${ i }>
+		
+	</c:forEach>
 	
+	<!-- 자바의 향상된 for 구문처럼 사용하기 -->
+	<c:forEach var="color" items="${ array }">
+		<%-- ${ color  } <br> --%>
+		<b style="color: ${ color };">${ color } </b>
+	</c:forEach>
 	
+	<!-- Student 객체의 데이터를 표로 출력하기 -->
+	<%
+		List<Student> list = new ArrayList<> ();
+		
+		list.add(new Student("최송희", 29, 80, 80));
+		list.add(new Student("이정후", 25, 70, 90));
+		list.add(new Student("김태진", 28, 100, 100));
+		list.add(new Student("이슬기", 31, 70, 70));
+		
+		pageContext.setAttribute("list", list);
+	%>
 	
-	
+	<h5>* 학생 목록 조회 (Student.java)</h5>
+	<table border="1">
+		<tr>
+			<th>index</th>
+			<th>순번</th>
+			<th>First</th>
+			<th>Last</th>
+			<th>이름</th>
+			<th>나이</th>
+			<th>수학 점수</th>
+			<th>영어 점수</th>
+		</tr>
+		<c:forEach var="student" items="${ list }" varStatus="status">
+			<tr>
+				<td>${ status.index}</td>
+				<td>${ status.count}</td>
+				<td>${ status.first}</td>
+				<td>${ status.last}</td>
+				<td>${ student.name }</td>
+				<td>${ student.age }</td>
+				<td>${ student.math }</td>
+				<td>${ student.english }</td>
+			</tr>
+		</c:forEach>
+		
+		
+		
+		
+	</table>
 	
 	
 	
