@@ -106,16 +106,11 @@
 			xhr.open("POST", "${ path }/jsAjax.do", true);
 
 			// POST방식의 경우 header 설정 필요
+			// * POST 요청의 경우 send() 메소드 호출 전에 아래와 같이 요청 헤더를 추가해야 한다.
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
 			// 4) send() 메소드 호출
 			xhr.send("name=이정후&age=25");
-
-
-
-
-
-
 
 		}
 	</script>
