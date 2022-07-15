@@ -120,13 +120,23 @@
 	<h2>2. jQuery를 이용한 AJAX 테스트</h2>
 	<h3>1) GET 방식으로 서버에 데이터 전송 및 응답</h3>
 	
-	입력 : <input type="text" id="input1" /><br>
-	출력 : <input type="text" id="output1" readonly><br><br>
+	입력 : <input type="text" id="input1" size="30" /><br>
+	출력 : <input type="text" id="output1" readonly size="30"><br><br>
 	
 	<button id="btn3">GET 방식 전송</button>
+
+
+	<h3>2) POST 방식으로 서버에 여러 개의 데이터 전송 및 응답</h3>
+	
+	이름 : <input type="text" id="name" /><br>
+	나이 : <input type="text" id="age" /><br>
+	출력 : <input type="text" id="output2" readonly size="30"><br><br>
+	
+	<button id="btn4">POST 방식 전송</button>
 	
 	<script>
 		$(document).ready(function() {
+			// 1) GET 방식 
 			$('#btn3').on('click', function() {
 				let input = $('#input1').val();
 				
@@ -145,6 +155,8 @@
 					// 매개값은 서버에서 응답이 왔을 떄 전달해주는 값을 담는 변수!
 					success: function(data) {
 						console.log(data);
+						
+						$('#output1').val(data);
 					},
 					// AJAX 통신 실패 시 실행 될 콜백 함수
 					error: function(error) {
@@ -152,12 +164,26 @@
 					},
 					// AJAX 통신 성공 여부와 상관 없이 실행 될 콜백 함수
 					complete: function() {
-						console.log(error);
-						},
+						console.log("complete");
 					}
 				});
 			});
+
+			// 2) POST 방식
+			$('#btn4').on('click', () => {
+				let name = $('#name').val();
+				let age = $('#age').val();
+				alert('이름 : ' + name + ", 나이 : " + age);
+			});
+			
+
 		});
+
+
+
+
+
+
 	</script>
 	
 	
@@ -176,6 +202,13 @@
 	
 	
 	
-	
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br>
 </body>
 </html>
