@@ -134,6 +134,17 @@
 	
 	<button id="btn4">POST 방식 전송</button>
 	
+	<h3>3) 서버에 데이터 전송 후, 응답을 객체(javaScript Ojbect)로 받기</h3>
+	회원 번호 : <input type="text" id="userNo">
+
+	<button id="btn5">조회</button><br>
+
+	<textarea id="textarea5" rows="4" cols="40"></textarea>
+
+
+
+
+
 	<script>
 		$(document).ready(function() {
 			// 1) GET 방식 
@@ -165,7 +176,7 @@
 					// AJAX 통신 성공 여부와 상관 없이 실행 될 콜백 함수
 					complete: function() {
 						console.log("complete");
-					}
+					},
 				});
 			});
 
@@ -173,9 +184,63 @@
 			$('#btn4').on('click', () => {
 				let name = $('#name').val();
 				let age = $('#age').val();
-				alert('이름 : ' + name + ", 나이 : " + age);
+				// alert('이름 : ' + name + ", 나이 : " + age);
+
+				$.ajax({
+					type: "POST",
+					url: "${ path }/jqAjax1.do",
+					data: {
+						// 속성명 : 변수
+						name, // 'name': name,
+						age // 'age': age
+					},
+					success: (data) => {
+						console.log(data);
+
+						$('#output2').val(data);
+					},
+					error: (error) => {
+						console.log(error);
+					},
+					complete: () => {
+						console.log("complete");
+					}
+				});
 			});
-			
+
+			// 3) 서버에 데이터 전송 후, 응답을 객체로 받기
+			$('#btn5').on('click', () => {
+				let userNo = $('#userNo').val();
+				// alert('버튼 클릭 : ' + userId);
+
+				$.ajax({
+					type: "GET",
+					url: "${ path }/jqAjax2.do",
+					dataType: "json", // 응답 데이터 형식
+					data: {
+						userNo
+					},
+					success: (obj) => {
+						console.log(obj);
+					},
+					error: (error) => {
+						console.log(error);
+					},
+					complete: () => {
+						console.log('complete');
+					}
+				});
+
+
+
+
+			});
+
+
+
+
+
+
 
 		});
 

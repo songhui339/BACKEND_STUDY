@@ -25,7 +25,13 @@ public class JqAjaxServlet1 extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		
+		System.out.println("name : " + name + " , age : " + age);
+		
+		response.setContentType("text/html;charset=UTF-8");
+		response.getWriter().print("name : " + name + " , age : " + age);
 	}
 
 }
