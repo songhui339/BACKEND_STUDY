@@ -222,12 +222,22 @@
 					},
 					success: (obj) => {
 						console.log(obj);
+						
+						let result = "";
+						
+						if(obj !== null) {
+							result = "회원 번호" + obj.no + ", 이름 : " + obj.name +
+									", 나이 : " + obj.age + ", 성별 : " + obj.gender;
+						} else {
+							result = "사용자 정보가 없습니다.";
+						}
+						
+						$('#textarea5').val(result);
+						
+						
 					},
 					error: (error) => {
 						console.log(error);
-					},
-					complete: () => {
-						console.log('complete');
 					}
 				});
 
@@ -237,18 +247,7 @@
 			});
 
 
-
-
-
-
-
 		});
-
-
-
-
-
-
 	</script>
 	
 	
