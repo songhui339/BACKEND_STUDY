@@ -42,7 +42,7 @@ public class JqAjaxServlet2 extends HttpServlet {
 		// 오...여기서부터 어렵다 복습 필수
 		System.out.println(new Gson().toJson(findUser));
 		// git 에서 복사해오기 (너무 어렵 ㅜㅠ)
-//		System.out.println(new Gson().fromJson("{\"no\":" + 5 , "\"name\": \"이정후\"}", null));
+		System.out.println(new Gson().fromJson("{\"no\":5,\"name\":\"안경태\",\"age\":16,\"gender\":\"남자\"}", User.class));
 		
 		/* 
 		 * Java Object를 JSON(문자열)로 바꿔줌 
