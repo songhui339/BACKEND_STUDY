@@ -139,11 +139,18 @@
 
 	<button id="btn5">조회</button><br>
 
-	<textarea id="textarea5" rows="4" cols="40"></textarea>
+	<textarea id="textarea5" rows="5" cols="60"></textarea>
 
 
+	<h3>4) 서버에 데이터 전송 후, 응답을 리스트(List)로 받기</h3>
 
+	성별 : 
+	<label><input type="radio" name="gender" value="남자" checked>남자</label>
+	<label><input type="radio" name="gender" value="여자">여자</label>
 
+	<button id="btn6">조회</button><br>
+
+	<textarea id="textarea6" rows="5" cols="60"></textarea>
 
 	<script>
 		$(document).ready(function() {
@@ -208,7 +215,7 @@
 				});
 			});
 
-			// 3) 서버에 데이터 전송 후, 응답을 객체로 받기
+			// 3) 서버에 데이터 전송 후, 응답을 객체로 받기 (JSON GET 방식)
 			$('#btn5').on('click', () => {
 				let userNo = $('#userNo').val();
 				// alert('버튼 클릭 : ' + userId);
@@ -246,7 +253,37 @@
 
 			});
 
+			// 4) 서버에 데이터 전송 후, 응답을 리스트(List)로 받기 (JSON POSTS 방식)
+			$('#btn6').on('click', () => {
+				let gender = $('input[name=gender]:checked').val();
+				// alert('버튼 클릭 : ' + gender);
 
+				$.ajax({
+					type: "POST",
+					url: "${ path }/jqAjax2.do",
+					datatype: "json",
+					data: {
+						gender // 'gender' : gender
+					},
+					success: (list) => {
+						console.log(list);
+						
+						let result = "";
+						$.each(list, (i) => {
+							result += 
+									"회원 번호 : " + list[i].no + 
+									", 이름 : " + list[i].name +
+									", 나이 : " + list[i].age + 
+									", 성별 : " + list[i].gender + "\n";
+						});
+
+						$("#textarea6").val(result);
+					},
+					error: (error) => {
+						console.log(error);
+					}
+				});
+			});
 		});
 	</script>
 	

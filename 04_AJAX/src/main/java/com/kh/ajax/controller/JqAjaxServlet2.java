@@ -3,6 +3,7 @@ package com.kh.ajax.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -64,7 +65,37 @@ public class JqAjaxServlet2 extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		// 4) 서버에 데이터 전송 후, 응답을 리스트(List)로 받기 (JSON POSTS 방식)
+		String gender = request.getParameter("gender");
+		
+		// 사용자 정보가 저장되어 있는 List 객체 생성(가라 데이터)
+		List<User> list = new ArrayList<>();
+		
+		list.add(new User(1, "이슬기", 31, "남자"));
+		list.add(new User(2, "최송희", 29, "여자"));
+		list.add(new User(3, "이정후", 25, "남자"));
+		list.add(new User(4, "영심이", 16, "여자"));
+		list.add(new User(5, "안경태", 16, "남자"));
+		
+		List<User> findList = list.stream()
+								  .filter(user -> user.getGender().equals(gender))
+								  .collect(Collectors.toList());
+		
+		System.out.println(gender);
+		System.out.println(findList);
+		System.out.println(new Gson().toJson(findList));
+		
+		// json으로 헤더 설정해주기
+		response.setContentType("application/json;charset=UTF-8");
+		
+		new Gson().toJson(findList, response.getWriter());
+		
+		
+		
+		
+		
+		
+		
 	}
 
 }
