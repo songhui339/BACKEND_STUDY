@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>AJAX</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<h1>AJAX(Asynchronous JavaScript and XML)</h1>
@@ -116,11 +117,48 @@
 	</script>
 	
 	
+	<h2>2. jQuery를 이용한 AJAX 테스트</h2>
+	<h3>1) GET 방식으로 서버에 데이터 전송 및 응답</h3>
 	
+	입력 : <input type="text" id="input1" /><br>
+	출력 : <input type="text" id="output1" readonly><br><br>
 	
+	<button id="btn3">GET 방식 전송</button>
 	
-	
-	
+	<script>
+		$(document).ready(function() {
+			$('#btn3').on('click', function() {
+				let input = $('#input1').val();
+				
+				$.ajax({
+					// 전송 방식(GET, POST)
+					type: "GET",
+					// 데이터를 전송(혹은 서버에 요청))할 URL *필수요소*
+					url: "${ path }/jqAjax1.do",
+					// 요청 시 전달할 파라미터 설정
+					data: {
+						// 변수명이 같으면 하나만 적으면 됨
+						// 'input' : input
+						input 
+					},
+					// AJAX 통신 성공 시 실행 될 콜백 함수
+					// 매개값은 서버에서 응답이 왔을 떄 전달해주는 값을 담는 변수!
+					success: function(data) {
+						console.log(data);
+					},
+					// AJAX 통신 실패 시 실행 될 콜백 함수
+					error: function(error) {
+						console.log(error);
+					},
+					// AJAX 통신 성공 여부와 상관 없이 실행 될 콜백 함수
+					complete: function() {
+						console.log(error);
+						},
+					}
+				});
+			});
+		});
+	</script>
 	
 	
 	
