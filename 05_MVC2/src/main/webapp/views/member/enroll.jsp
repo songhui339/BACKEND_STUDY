@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="/views/common/header.jsp" />
+<c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 <style>
 	section #enroll-container {
@@ -30,7 +31,7 @@
 <section id="content">
 	<h2 align="center">회원 가입 정보</h2>
 	<div id="enroll-container">	 	
-	 	<form name="memberEnrollFrm" action="" method="post">
+	 	<form name="memberEnrollFrm" action="${ path }/member/enroll" method="post">
 	 		<table>
 	 			<tr>
 					<th>아이디</th>

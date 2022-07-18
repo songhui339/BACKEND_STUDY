@@ -38,11 +38,17 @@ public class LoginServlet extends HttpServlet {
 			Cookie cookie = new Cookie("saveId", userId);
 			
 			// 2. 쿠키의 유지시간 지정 후 response 객체에 쿠키 추가
-			// cookie.setMaxAge(-1); // -1 브라우저가 종료될때까지 유지됨 
-			cookie.setMaxAge(259200); // 3일 동안 유지 (네이버 시간변환 통해서 계산함)
+			cookie.setMaxAge(-1); // -1 브라우저가 종료될때까지 유지됨 
+			// cookie.setMaxAge(259200); // 3일 동안 유지 (네이버 시간변환 통해서 계산함)
 			response.addCookie(cookie);
 			
 		} else {
+			// 기존 쿠키 값 삭제하기!
+			// 동일한 키 값을 가지는 쿠키 객체를 생성 후 유지시간을 0으로 설정한다.
+			Cookie cookie = new Cookie("saveId", "");
+			
+			cookie.setMaxAge(0);
+			response.addCookie(cookie);
 			
 		}
 		
