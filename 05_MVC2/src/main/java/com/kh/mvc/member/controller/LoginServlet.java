@@ -3,6 +3,7 @@ package com.kh.mvc.member.controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,14 +19,32 @@ public class LoginServlet extends HttpServlet {
     public LoginServlet() {
     }
     
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = null;
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		String saveId = request.getParameter("saveId");
 		
-		System.out.println(userId + ", " + userPwd);
+		System.out.println(userId + ", " + userPwd + ", " + saveId);
 		
 		Member loginMember = new MemberService().login(userId, userPwd);
+		
+		// 아이디 저장 체크 시 무조건 저장되도록 세팅 
+		
+		if(saveId != null) {
+			// 현재 전달된 아이디를 쿠키에 저장하기 
+			// 1. 쿠키 생성
+			Cookie cookie = new Cookie("saveId", userId);
+			
+			// 2. 쿠키의 유지시간 지정 후 response 객체에 쿠키 추가
+			// cookie.setMaxAge(-1); // -1 브라우저가 종료될때까지 유지됨 
+			cookie.setMaxAge(259200); // 3일 동안 유지 (네이버 시간변환 통해서 계산함)
+			response.addCookie(cookie);
+			
+		} else {
+			
+		}
 		
 		// loginMember가 null이면 로그인 실패
 		// loginMember가 null이 아니면 로그인 성공 

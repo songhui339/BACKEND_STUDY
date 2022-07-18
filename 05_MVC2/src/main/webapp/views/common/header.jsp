@@ -23,7 +23,8 @@
 					<table>
 						<tr>
 							<td>
-								<input type="text" name="userId" id="userId" placeholder="아이디" required>
+								<input type="text" name="userId" id="userId" placeholder="아이디" 
+									value="${ empty cookie.saveId ? '' : cookie.saveId.value }" required>
 							</td>
 							<td></td>
 						</tr>
@@ -37,7 +38,8 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<label><input type="checkbox" name="saveId">아이디 저장</label>
+								<label><input type="checkbox" name="saveId"
+											${ empty cookie.saveId ? "" : "checked" }>아이디 저장</label>
 								<input type="button" value="회원가입" onclick="location.href = '${ path }/member/enroll';"> 
 							</td>
 						</tr>
@@ -57,7 +59,7 @@
 							<button>내 정보</button>
 						</td>
 						<td>
-							<button>로그아웃</button>
+							<button onclick="location.replace('${ path }/logout')">로그아웃</button>
 						</td>
 					</tr>
 				</table>
