@@ -26,7 +26,8 @@ public class MemberDao {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			// 2. 오라클 DB에 연결 (Add Catch exception)
+			// 2. 오라클 DB에 연결 (Add Catch exception) 
+			// getConnection을 통해 데이터베이스에 대한 정보를 전달해주기
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@10.211.55.3:1521:xe", "WEB", "WEB");
 			
 			// 3. statement 등록
