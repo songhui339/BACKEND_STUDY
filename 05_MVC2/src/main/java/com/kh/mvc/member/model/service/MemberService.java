@@ -8,12 +8,15 @@ import com.kh.mvc.member.model.vo.Member;
 public class MemberService {
 
 	public Member login(String id, String password) {
-		Member member = null;
+		Member member = new MemberDao().findMemberById(id);
 		
-		member = new MemberDao().findMemberById(id);
+		if(member == null || !member.getPassword().equals(password)) {
+			return null;
+		} else {
+			return member;
+		}
 		
 		
-		return member;
 	}
 
 }

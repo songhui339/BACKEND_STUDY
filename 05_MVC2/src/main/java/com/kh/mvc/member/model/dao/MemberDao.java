@@ -40,11 +40,29 @@ public class MemberDao {
 			
 			// 가져온 값을 출력
 			if(rs.next()) {
+				member = new Member();
+				
+				// member 객체에 로그인 정보 넣어주기 (한땀한땀)
+				member.setNo(rs.getInt("NO"));
+				member.setId(rs.getString("ID"));
+				member.setPassword(rs.getString("PASSWORD"));
+				member.setRole(rs.getString("ROLE"));
+				member.setName(rs.getString("NAME"));
+				member.setPhone(rs.getString("PHONE"));
+				member.setEmail(rs.getString("EMAIL"));
+				member.setAddress(rs.getString("ADDRESS"));
+				member.setHobby(rs.getString("HOBBY"));
+				member.setStatus(rs.getString("STATUS"));
+				member.setEnrollDate(rs.getDate("ENROLL_DATE"));
+				member.setModifyDate(rs.getDate("MODIFY_DATE"));
+				
+				/*
 				// 컬럼명을 넣어줌
 				System.out.println(rs.getInt("NO"));
 				System.out.println(rs.getString("ID"));
 				System.out.println(rs.getString("NAME"));
 				System.out.println(rs.getString("ROLE"));
+				*/
 			}
 			
 			
