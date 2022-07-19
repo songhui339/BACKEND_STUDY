@@ -1,6 +1,7 @@
 package com.kh.mvc.common.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -8,13 +9,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 
 import com.kh.mvc.common.wrapper.EncryptPasswordWrapper;
 
 // 파라미터 값의 암호화를 진행할 것임
-@WebFilter( filterName = "encrypt", servletNames = { "EnrollServlet", "LoginServlet"})
+@WebFilter( filterName = "encrypt", servletNames = { "enroll", "login"})
 public class EncryptFilter implements Filter {
        
     public EncryptFilter() {
