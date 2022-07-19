@@ -96,4 +96,29 @@
  	</div>
 </section>
 
+<script>
+	// 아이디 중복 확인 
+	$(document).ready(() => {
+		$('#checkDuplicate').on('click', () => {
+			let userId = $('#newId').val().trim();
+			
+			
+			
+			alert('버튼 클릭 : ' + userId);
+			
+			
+			
+			
+			
+			
+		});	
+		
+	});
+	
+	
+	
+	
+	
+</script>
+
 <jsp:include page="/views/common/footer.jsp" /> 

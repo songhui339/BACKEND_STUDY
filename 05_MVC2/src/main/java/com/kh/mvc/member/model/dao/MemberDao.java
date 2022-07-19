@@ -1,10 +1,12 @@
 package com.kh.mvc.member.model.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+// import com.kh.mvc.common.jdbc.JDBCTemplate;
+import static com.kh.mvc.common.jdbc.JDBCTemplate.*;
 
 import com.kh.mvc.member.model.vo.Member;
 
@@ -14,7 +16,6 @@ public class MemberDao {
 	public Member findMemberById(Connection connection, String id) {
 		// return해야하는 참조객체를 꼭 처음에 만들어두어야한다!
 		Member member = null;
-		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		// ?를 사용하지 않으면 아래처럼 작성해야함. 하지만 가독성이 떨어지고 효율이 떨어지기 때문에 ?를 사용
@@ -24,19 +25,9 @@ public class MemberDao {
 		
 		// 1. 오라클 JDBC 드라이버 등록 - 예외 처리(ClassNotFoundException / surround with try catch)
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+			pstm = connection.prepareStatement(query);
 			
-			// 2. 오라클 DB에 연결 (Add Catch exception) 
-			// getConnection을 통해 데이터베이스에 대한 정보를 전달해주기
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@10.211.55.3:1521:xe", "WEB", "WEB");
-			
-			// 3. statement 등록
-			pstm = conn.prepareStatement(query);
-			
-			// ?(위치 홀더) 만들어서 퀴리문 수행 전에 Id로 세팅해둠 (의미 : 첫번째 물음표는 ID임)
 			pstm.setString(1, id);
-			
-			// 쿼리문 실행 후 그 결과값을 ResultSet으로 리턴해주는 역할
 			rs = pstm.executeQuery();
 			
 			// 가져온 값을 출력
@@ -56,37 +47,52 @@ public class MemberDao {
 				member.setStatus(rs.getString("STATUS"));
 				member.setEnrollDate(rs.getDate("ENROLL_DATE"));
 				member.setModifyDate(rs.getDate("MODIFY_DATE"));
-				
-				/*
-				// 컬럼명을 넣어줌
-				System.out.println(rs.getInt("NO"));
-				System.out.println(rs.getString("ID"));
-				System.out.println(rs.getString("NAME"));
-				System.out.println(rs.getString("ROLE"));
-				*/
 			}
 			
-			
-			
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			// conn.close(); -> surround with try catch 예외 처리 
-			try {
-				// close(); 할떄는 생성된 순선의 역순으로 작성
-				rs.close();
-				pstm.close();
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+//			JDBCTemplate.close(rs);
+//			JDBCTemplate.close(pstm);
+			close(rs);
+			close(pstm);
 		}
 		
 		return member;
+	}
+
+	// DB에 회원가입한 데이터 보내주는 용의 코드 
+	public int insertMember(Connection connection, Member member) {
+		int result = 0;
+		// 멤버 추가 쿼리문 작성해둔 것임 
+		String query = "INSERT INTO MEMBER VALUES(SEQ_UNO.NEXTVAL,?,?,DEFAULT,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT)";
+		PreparedStatement pstm = null;
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			// ? 부분의 정보를 넣어주기 (총 7개)
+			pstm.setString(1, member.getId());
+			pstm.setString(2, member.getPassword());
+			pstm.setString(3, member.getName());
+			pstm.setString(4, member.getPhone());
+			pstm.setString(5, member.getEmail());
+			pstm.setString(6, member.getAddress());
+			pstm.setString(7, member.getHobby());
+			
+			// 쿼리문을 수행 한 후 영향받은 행의 개수를 result에 담아준다!
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		
+		return result;
 	}
 
 }
