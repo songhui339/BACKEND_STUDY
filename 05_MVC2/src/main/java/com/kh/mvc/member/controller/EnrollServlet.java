@@ -25,7 +25,8 @@ public class EnrollServlet extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	// 한글 깨짐 현상 해결을 위한 Encoding 코드 추가
-    	request.setCharacterEncoding("UTF-8");
+    	// 필터 서블릿을 만들었기 때문에 지워봄
+//    	request.setCharacterEncoding("UTF-8");
     	
     	Member member = new Member();
     	
