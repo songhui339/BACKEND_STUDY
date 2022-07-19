@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.mvc.common.util.EncryptUtil;
 import com.kh.mvc.member.model.vo.Member;
 
 @WebServlet("/member/enroll")
