@@ -101,23 +101,32 @@
 	$(document).ready(() => {
 		$('#checkDuplicate').on('click', () => {
 			let userId = $('#newId').val().trim();
-			
-			
-			
-			alert('버튼 클릭 : ' + userId);
-			
-			
-			
-			
-			
+			// 비동기 통신
+			$.ajax({
+				type: "POST",
+				url: "${ path }/member/idCheck",
+				dataType: "json",
+				data: {
+					userId // "userId" userId
+				},
+				success: (obj) => {
+					console.log(obj);
+					
+					if(obj.duplicate === true) {
+						alert('이미 사용중인 아이디입니다.');
+					} else {
+						alert('사용 가능한 아이디입니다.');
+					}
+				},
+				error: (error) => {
+					console.log(error);
+				}
+				
+			});
 			
 		});	
 		
 	});
-	
-	
-	
-	
 	
 </script>
 

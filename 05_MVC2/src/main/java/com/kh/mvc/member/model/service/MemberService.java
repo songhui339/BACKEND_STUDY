@@ -50,4 +50,21 @@ public class MemberService {
 		return result;
 	}
 
+	
+	// 아이디 중복 확인을 위한 메소드 (CheckServlet.java 파일 통해서 생성함)
+	public Boolean isDuplicateId(String id) {
+		// 위에 이미 만들어뒀음! 
+//		new MemberDao().findMemberById(getConnection(), id);
+		
+		Connection connection = getConnection();
+		
+		Member member = new MemberDao().findMemberById(connection, id);
+		
+		
+		
+		close(connection);
+		
+		return member != null;
+	}
+
 }
