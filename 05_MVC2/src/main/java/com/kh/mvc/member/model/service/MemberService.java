@@ -19,4 +19,9 @@ public class MemberService {
 		
 	}
 
+	public int save(Member member) {
+		
+		return 1;
+	}
+
 }

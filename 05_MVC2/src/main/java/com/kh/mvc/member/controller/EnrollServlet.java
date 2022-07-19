@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.mvc.member.model.service.MemberService;
 import com.kh.mvc.member.model.vo.Member;
 
 @WebServlet(name="enroll", urlPatterns = "/member/enroll")
@@ -40,6 +41,30 @@ public class EnrollServlet extends HttpServlet {
     	member.setHobby(String.join(", ", request.getParameterValues("hobby")));
     	
     	System.out.println(member);
+    	
+    	// 회원 가입 로직 구현 
+    	int result = new MemberService().save(member);
+    	
+    	// result가 0보다 크다는 것은 회원가입 성공
+    	// 0보다 작으면 회원가입 실패!
+    	if(result > 0) {
+    		// 회원 가입 성공
+    		request.setAttribute("msg", "회원 가입 성공");
+			request.setAttribute("location", "/");
+    	} else {
+    		// 회원 가입 실패
+    		request.setAttribute("msg", "회원 가입 실패");
+			request.setAttribute("location", "/member/enroll");
+			
+    	}
+    	
+    	// request 객체의 데이터를 유지해서 에러 메세지 출력 페이지에 전달하기 위해 forward() 실행
+    	request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+    	
+    	
+    	
+    	
+    	
 	}
     
 
