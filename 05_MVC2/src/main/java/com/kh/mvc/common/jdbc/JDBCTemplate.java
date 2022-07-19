@@ -29,6 +29,7 @@ public class JDBCTemplate {
 					properties.getProperty("db.password")
 			);
 			
+			// 자동으로 commit 되는 것을 방지하기 위한 코드
 			connection.setAutoCommit(false);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();

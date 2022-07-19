@@ -11,7 +11,7 @@ import com.kh.mvc.member.model.vo.Member;
 // 이 객체가 실제 DB와 연결되어 DB를 가져올 역할
 public class MemberDao {
 
-	public Member findMemberById(String id) {
+	public Member findMemberById(Connection connection, String id) {
 		// return해야하는 참조객체를 꼭 처음에 만들어두어야한다!
 		Member member = null;
 		Connection conn = null;
