@@ -93,7 +93,7 @@
 	        </table>
 	        <button type="button">비밀번호변경</button>
 	        <input type="submit" value="정보수정">
-	        <input type="button" value="탈퇴">
+	        <input type="button" id="btnDelete" value="탈퇴">
 	 	</form>
  	</div>
 </section>

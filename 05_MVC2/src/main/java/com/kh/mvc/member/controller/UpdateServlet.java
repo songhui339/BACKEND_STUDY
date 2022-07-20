@@ -44,7 +44,7 @@ public class UpdateServlet extends HttpServlet {
         	if (result > 0) {
 				// 회원 정보 수정 성공
         		// 세션 갱신 
-//        		session.setAttribute("loginMember", new MemberService().);
+        		session.setAttribute("loginMember", new MemberService().findMemberById(loginMember.getId()));
         		request.setAttribute("msg", "회원 정보 수정 완료");
     			request.setAttribute("location", "/member/myPage");
 			} else {

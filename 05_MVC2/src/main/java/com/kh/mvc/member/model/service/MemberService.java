@@ -13,13 +13,7 @@ public class MemberService {
 	public Member login(String id, String password) {
 		// Connection은 service에서 처리하는 것이 좋음!
 		// 오류 방지를 위하여!
-		Connection connection = getConnection();
-		
-		
-		Member member = new MemberDao().findMemberById(connection, id);
-		
-		// 데이터베이스 정보를 다 읽어왔으니 close한다!
-		close(connection);
+		Member member = this.findMemberById(id);
 		
 		if(member == null || !member.getPassword().equals(password)) {
 			return null;
@@ -63,15 +57,19 @@ public class MemberService {
 		// 위에 이미 만들어뒀음! 
 //		new MemberDao().findMemberById(getConnection(), id);
 		
+		// findMemberById 밑에 만들어뒀기 때문에 중복되는 코드를 삭제
+		return this.findMemberById(id) != null;
+	}
+
+
+	public Member findMemberById(String id) {
 		Connection connection = getConnection();
-		
 		Member member = new MemberDao().findMemberById(connection, id);
 		
-		
-		
+		// 데이터베이스 정보를 다 읽어왔으니 close한다!
 		close(connection);
 		
-		return member != null;
+		return member;
 	}
 
 }
