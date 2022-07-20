@@ -51,6 +51,24 @@ public class MemberService {
 		return result;
 	}
 
+	// 탈퇴시 동작하는 메소드
+	public int delete(int no) {
+		int result = 0;
+		Connection connection = getConnection();
+		result = new MemberDao().updateMemberStatus(connection, no, "N");
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		
+		return result;
+	}
+	
 	
 	// 아이디 중복 확인을 위한 메소드 (CheckServlet.java 파일 통해서 생성함)
 	public Boolean isDuplicateId(String id) {
@@ -71,5 +89,8 @@ public class MemberService {
 		
 		return member;
 	}
+
+
+	
 
 }

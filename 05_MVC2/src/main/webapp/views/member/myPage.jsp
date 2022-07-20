@@ -97,5 +97,21 @@
 	 	</form>
  	</div>
 </section>
+<script>
+
+	/* 찐으로 탈퇴할거야?! 라고 물어보는 스크립트 작성 */
+	$(document).ready(() => {
+		$("#btnDelete").on("click", () => {
+			if(confirm("정말로 탈퇴하시겠습니까?")) {
+				location.replace("${ path }/member/delete");
+			}
+		});
+		
+		
+		
+	});
+</script>
+
+
 
 <jsp:include page="/views/common/footer.jsp" /> 

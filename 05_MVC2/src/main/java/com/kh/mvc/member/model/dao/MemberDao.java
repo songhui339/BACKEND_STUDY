@@ -122,5 +122,28 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	// 멤버 탈퇴를 위한 로직
+	public int updateMemberStatus(Connection connection, int no, String status) {
+		int result = 0;
+		String query ="UPDATE MEMBER SET STATUS=? WHERE NO=?";
+		PreparedStatement pstm = null;
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			pstm.setString(1, status);
+			pstm.setInt(2, no);
+			
+			result = pstm.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
 
 }
