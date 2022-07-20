@@ -35,6 +35,8 @@
 	<h2 align="center">회원 정보 수정</h2>
 	<div id="view-container">
 		<form id="memberFrm" action="${ path }/member/update" method="post">
+		
+			<%-- <input type="hidden" value="${ loginMember.no }"> --%>
 			<table>
 				<tr>
 	                <th>아이디</th>

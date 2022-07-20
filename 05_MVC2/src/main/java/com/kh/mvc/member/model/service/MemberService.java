@@ -31,11 +31,18 @@ public class MemberService {
 	
 	public int save(Member member) {
 		int result = 0;
-		
 		// DB에 접근은 MemberDao 객체를 통해서 접근한다.
 		Connection connection = getConnection();
 		
-		result = new MemberDao().insertMember(connection, member);
+		// PK 값인 NO 값이 있으면 UPDATE 작업을 하고 0 이면 INSERT 작업 
+		if (member.getNo() != 0) {
+			// update 작업 
+			result = new MemberDao().updateMember(connection, member);
+		} else {
+			// insert 작업
+			result = new MemberDao().insertMember(connection, member);
+		}
+		
 		
 		// 정상적으로 처리 되면 COMMIT 하고 아니면 ROLLBACK하자!
 		// 코드가 간결화된건 JDBCTemplate에 구현되어 있기 때문이다!

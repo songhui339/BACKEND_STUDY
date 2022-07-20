@@ -95,4 +95,32 @@ public class MemberDao {
 		return result;
 	}
 
+	public int updateMember(Connection connection, Member member) {
+		int result = 0;
+		String query = "UPDATE MEMBER SET NAME=?,PHONE=?,EMAIL=?,ADDRESS=?,HOBBY=?,MODIFY_DATE=SYSDATE WHERE NO=?";
+		
+		PreparedStatement pstm = null;
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			// ? 부분의 정보 넣어주기
+			pstm.setString(1, member.getName());
+			pstm.setString(2, member.getPhone());
+			pstm.setString(3, member.getEmail());
+			pstm.setString(4, member.getAddress());
+			pstm.setString(5, member.getHobby());
+			pstm.setInt(6, member.getNo());
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
+
 }
