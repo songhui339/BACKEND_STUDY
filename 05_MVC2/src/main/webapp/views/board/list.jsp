@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="path" value="${ pageContext.request.contextPath }"/>
 <jsp:include page="/views/common/header.jsp" />
 
 <style>
@@ -16,7 +19,10 @@
 <section id="content">
 	<h2 align="center">게시판 </h2>
 	<div id="board-list-container">
-		<button type="button" id="btn-add">글쓰기</button>
+		<!-- 로그인 했을 때만 글쓰기 버튼 보여지도록 세팅 -->
+		<c:if test="${ not empty loginMember }">
+			<button type="button" id="btn-add">글쓰기</button>
+		</c:if>
 
 		<table id="tbl-board">
 			<tr>
@@ -45,12 +51,24 @@
 		</table>
 		<div id="pageBar">
 			<!-- 맨 처음으로 -->
-			<button>&lt;&lt;</button>
+			<button onclick="location.href='${ path }/board/list?page=1'">&lt;&lt;</button>
 
 			<!-- 이전 페이지로 -->
-			<button>&lt;</button>
+			<button onclick="location.href='${ path }/board/list?page=${ pageInfo.prevPage }'">&lt;</button>
 
 			<!--  10개 페이지 목록 -->
+			<!-- 반복문 작성 -->
+			<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+				<!-- 선택한 페이지 버튼은 비활성화 -->
+				<c:if test="${ status.current == pageInfo.currentPage }">
+					<button disabled>${ status.current }</button>
+				</c:if>
+				<!-- 선택 되지 않은 페이지 버튼은 활성화 -->
+				<c:if test="${ status.current != pageInfo.currentPage }">
+					<button onclick="location.href='${ path }/board/list?page=${ status.current }'">${ status.current }</button>
+				</c:if>
+			</c:forEach>
+			<!-- 
 			<button disabled>1</button>
 			<button>2</button>
 			<button>3</button>
@@ -60,13 +78,13 @@
 			<button>7</button>
 			<button>8</button>
 			<button>9</button>
-			<button>10</button>
+			<button>10</button> -->
 
 			<!-- 다음 페이지로 -->
-			<button>&gt;</button>
+			<button onclick="location.href='${ path }/board/list?page=${ pageInfo.nextPage }'">&gt;</button>
 
 			<!-- 맨 끝으로 -->
-			<button>&gt;&gt;</button>
+			<button onclick="location.href='${ path }/board/list?page=${ pageInfo.maxPage }'">&gt;&gt;</button>
 		</div>
 	</div>
 </section>
