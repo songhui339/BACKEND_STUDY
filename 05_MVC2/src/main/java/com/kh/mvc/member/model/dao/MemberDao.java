@@ -146,4 +146,28 @@ public class MemberDao {
 		return result;
 	}
 
+	// 비밀번호 변경을 위한 로직 
+	public int updateMemberPassword(Connection connection, int no, String password) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE MEMBER SET PASSWORD=? WHERE NO=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			// ? 부분에 정보 넣어주기
+			pstm.setString(1, password);
+			pstm.setInt(2, no);
+			
+			result = pstm.executeUpdate();			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
+
 }

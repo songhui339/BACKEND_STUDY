@@ -90,7 +90,23 @@ public class MemberService {
 		return member;
 	}
 
-
-	
+	// 비밀번호 변경을 위한 메소드
+	public int updatePassword(int no, String password) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new MemberDao().updateMemberPassword(connection, no, password);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
+		
+		return result;
+		
+	}
 
 }

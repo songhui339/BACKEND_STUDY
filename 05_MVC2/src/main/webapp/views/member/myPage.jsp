@@ -91,7 +91,7 @@
 					</td> 		
 	            </tr>
 	        </table>
-	        <button type="button">비밀번호변경</button>
+	        <button type="button" id="btnUpdatePwd">비밀번호변경</button>
 	        <input type="submit" value="정보수정">
 	        <input type="button" id="btnDelete" value="탈퇴">
 	 	</form>
@@ -99,8 +99,16 @@
 </section>
 <script>
 
-	/* 찐으로 탈퇴할거야?! 라고 물어보는 스크립트 작성 */
 	$(document).ready(() => {
+		/* 비밀번호 변경 스크립트 */
+		$("#btnUpdatePwd").on("click", () => {
+			let url = "${ path }/member/updatePwd";
+			let status = "left=500px, top=200px, width=400px, height=200px";
+			
+			open(url, "", status);
+		});
+		
+		/* 찐으로 탈퇴할거야?! 라고 물어보는 스크립트 작성 */
 		$("#btnDelete").on("click", () => {
 			if(confirm("정말로 탈퇴하시겠습니까?")) {
 				location.replace("${ path }/member/delete");

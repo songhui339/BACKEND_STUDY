@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.kh.mvc.common.wrapper.EncryptPasswordWrapper;
 
 // 파라미터 값의 암호화를 진행할 것임
-@WebFilter( filterName = "encrypt", servletNames = { "enroll", "login"})
+@WebFilter( filterName = "encrypt", servletNames = { "enroll", "login", "updatePwd"})
 public class EncryptFilter implements Filter {
        
     public EncryptFilter() {

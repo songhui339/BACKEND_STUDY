@@ -21,7 +21,7 @@
 </head>
 <body>
 	<div id="updatePassword-container">
-		<form action="" method="post">
+		<form action="${ pageContext.request.contextPath }/member/updatePwd" method="post">
 			<table>
 				<tr>
 					<th>변경할 비밀번호</th>
