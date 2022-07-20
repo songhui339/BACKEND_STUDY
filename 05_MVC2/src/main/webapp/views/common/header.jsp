@@ -67,9 +67,10 @@
 		</div>
 		<nav>
 			<ul class="main-nav">
-				<li class="home"><a href="/">Home</a></li>
-				<li id="board"><a href="/">게시판</a></li>
-				<li id="admin-member"><a href="/">회원관리</a></li>
+				<!-- "/" -> tomcat 루트로 되어 있는 것  -->
+				<li class="home"><a href="${ path }/">Home</a></li>
+				<li id="board"><a href="${ path }/board/list">게시판</a></li>
+				<li id="admin-member"><a href="${ path }/">회원관리</a></li>
 			</ul>
 		</nav>
 	</header> 
