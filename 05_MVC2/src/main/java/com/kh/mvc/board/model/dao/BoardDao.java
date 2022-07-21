@@ -162,6 +162,34 @@ public class BoardDao {
 		
 		return board;
 	}
+
+
+	// 삭제 로직
+	public int updateStatus(Connection connection, int no, String status) {
+		int result = 0;
+		
+		PreparedStatement pstm = null;
+		String query = "UPDATE BOARD SET STATUS=? WHERE NO=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			// ? 부분 세팅하기
+			pstm.setString(1, status);
+			pstm.setInt(2, no);
+			
+			
+			result = pstm.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
 	
 
 }

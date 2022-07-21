@@ -51,4 +51,23 @@ public class BoardService {
 		return board;
 	}
 
+	// 게시글 삭제 메소드
+	public int delete(int no) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new BoardDao().updateStatus(connection, no, "N");
+		
+		if(result > 0) {
+			// 삭제 성공 시
+			commit(connection);
+		} else {
+			rollback(connection);
+		} 
+		
+		close(connection);
+		
+		return result;
+	}
+
 }

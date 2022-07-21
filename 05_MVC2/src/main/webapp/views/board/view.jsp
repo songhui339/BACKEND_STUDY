@@ -63,9 +63,11 @@
 			<%--글작성자/관리자인경우 수정삭제 가능 --%>
 			<tr>
 				<th colspan="2">
-					<button type="button">수정</button>
-					<button type="button">삭제</button>
-					<button type="button">목록으로</button>
+					<c:if test="${ not empty loginMember && loginMember.id == board.writerId }">
+						<button type="button">수정</button>
+						<button type="button" id="btnDelete">삭제</button>
+					</c:if>
+					<button type="button" onclick="location.href='${ path }/board/list'">목록으로</button>
 				</th>
 			</tr>
 		</table>
@@ -95,5 +97,20 @@
 	    </table>
     </div>
 </section>
+
+<script>
+	$(document).ready(() => {
+		$('#btnDelete').on('click', () => {
+			if(confirm('정말 게시글 삭제를 진행하겠습니까?')){
+				// 삭제를 하려면 게시글의 no도 같이 넘겨줘야함
+				location.replace('${ path }/board/delete?no=${ board.no }');
+			}
+		});
+	});
+
+</script>
+
+
+
 
 <jsp:include page="/views/common/footer.jsp" /> 

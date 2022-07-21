@@ -33,7 +33,7 @@ public class ViewServlet extends HttpServlet {
 		
 		if(board != null) {
 			// 게시글이 있으면 board 객체 넘겨주기 
-			System.out.println(board);
+//			System.out.println(board);
 			
 			request.setAttribute("board", board);
 			request.getRequestDispatcher("/views/board/view.jsp").forward(request, response);
