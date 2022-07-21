@@ -40,4 +40,15 @@ public class BoardService {
 		return list;
 	}
 
+	public Board getBoardByNo(int no) {
+		Board board = null;
+		Connection connection = getConnection();
+		
+		board = new BoardDao().findBoardByNo(connection, no);
+		
+		close(connection);
+		
+		return board;
+	}
+
 }

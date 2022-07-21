@@ -106,6 +106,62 @@ public class BoardDao {
 		
 		return list;
 	}
+
+	
+	// 게시판 내용 No로 가져오기
+	public Board findBoardByNo(Connection connection, int no) {
+		Board board = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String query = "SELECT  B.NO, "
+							+ "B.TITLE, "
+							+ "M.ID, "
+							+ "B.READCOUNT, "
+							+ "B.ORIGINAL_FILENAME, "
+							+ "B.RENAMED_FILENAME, "
+							+ "B.CONTENT, "
+							+ "B.CREATE_DATE, "
+							+ "B.MODIFY_DATE "
+						+ "FROM BOARD B "
+						+ "JOIN MEMBER M ON(B.WRITER_NO = M.NO) "
+						+ "WHERE B.STATUS = 'Y' AND B.NO=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			pstm.setInt(1, no);
+			
+			
+			rs = pstm.executeQuery();
+			
+			if(rs.next()) {
+				// 1건씩 조회되는 Data를 Board 객체로 바꿔주는 작업
+				
+				board = new Board();
+				
+				board.setNo(rs.getInt("NO"));
+				board.setTitle(rs.getString("TITLE"));
+				board.setWriterId(rs.getString("ID"));
+				board.setReadCount(rs.getInt("READCOUNT"));
+				board.setOriginalFileName(rs.getString("ORIGINAL_FILENAME"));
+				board.setRenamedFileName(rs.getString("RENAMED_FILENAME"));
+				board.setContent(rs.getString("CONTENT"));
+				board.setCreateDate(rs.getDate("CREATE_DATE"));
+				board.setModifyDate(rs.getDate("MODIFY_DATE"));
+			}
+			
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstm);
+		}
+		
+		return board;
+	}
 	
 
 }
