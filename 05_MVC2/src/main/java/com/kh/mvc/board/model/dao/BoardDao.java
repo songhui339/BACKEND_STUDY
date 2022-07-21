@@ -190,6 +190,36 @@ public class BoardDao {
 		
 		return result;
 	}
+
+
+	// 게시물 등록 로직
+	public int insertBoard(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "INSERT INTO BOARD VALUES(SEQ_BOARD_NO.NEXTVAL,?,?,?,?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT)";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			// ? 부분 채워 넣기 
+			pstm.setInt(1, board.getWriterNo());
+			pstm.setString(2, board.getTitle());
+			pstm.setString(3, board.getContent());
+			pstm.setString(4, board.getOriginalFileName());
+			pstm.setString(5, board.getRenamedFileName());
+			
+			result = pstm.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		
+		return result;
+	}
 	
 
 }
