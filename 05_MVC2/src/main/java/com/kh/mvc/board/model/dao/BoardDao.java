@@ -220,6 +220,35 @@ public class BoardDao {
 		
 		return result;
 	}
+
+
+	// 게시물 수정 로직 
+	public int updateBoard(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE BOARD SET TITLE=?,CONTENT=?,ORIGINAL_FILENAME=?,RENAMED_FILENAME=?,MODIFY_DATE=SYSDATE WHERE NO=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			// ? 부분 채워 넣기
+			pstm.setString(1, board.getTitle());
+			pstm.setString(2, board.getContent());
+			pstm.setString(3, board.getOriginalFileName());
+			pstm.setString(4, board.getRenamedFileName());
+			pstm.setInt(5, board.getNo());
+			
+			result = pstm.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		return result;
+	}
 	
 
 }

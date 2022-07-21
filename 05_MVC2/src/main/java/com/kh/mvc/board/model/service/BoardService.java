@@ -70,12 +70,21 @@ public class BoardService {
 		return result;
 	}
 
-	// 게시물 등록 서비스 로직
+	// 게시물 등록 및 수정 서비스 로직
 	public int save(Board board) {
 		int result = 0;
 		Connection connection = getConnection();
 		
-		result = new BoardDao().insertBoard(connection, board);
+//		result = new BoardDao().insertBoard(connection, board);
+		
+		if(board.getNo() != 0) {
+			// update 작업 진행 
+			result = new BoardDao().updateBoard(connection, board);
+		} else {
+			// insert 작업 진행
+			result = new BoardDao().insertBoard(connection, board);
+		}
+		
 		
 		if(result > 0) {
 			commit(connection);

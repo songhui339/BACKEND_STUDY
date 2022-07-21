@@ -64,7 +64,7 @@
 			<tr>
 				<th colspan="2">
 					<c:if test="${ not empty loginMember && loginMember.id == board.writerId }">
-						<button type="button">수정</button>
+						<button type="button" onclick="location.href='${ path }/board/update?no=${ board.no }'">수정</button>
 						<button type="button" id="btnDelete">삭제</button>
 					</c:if>
 					<button type="button" onclick="location.href='${ path }/board/list'">목록으로</button>
