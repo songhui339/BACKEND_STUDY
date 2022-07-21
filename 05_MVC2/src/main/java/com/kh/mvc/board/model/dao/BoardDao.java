@@ -85,6 +85,7 @@ public class BoardDao {
 				
 				board.setRowNum(rs.getInt("RNUM"));
 				board.setNo(rs.getInt("NO"));
+				board.setWriterId(rs.getString("ID"));
 				board.setTitle(rs.getString("TITLE"));
 				board.setCreateDate(rs.getDate("CREATE_DATE"));
 				board.setOriginalFileName(rs.getString("ORIGINAL_FILENAME"));

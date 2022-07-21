@@ -33,21 +33,36 @@
 				<th>첨부파일</th>
 				<th>조회수</th>
 			</tr>
-			<tr>
-				<td colspan="6">
-					조회된 게시글이 없습니다.
-				</td>
-			</tr>	
-			<tr>
-				<td>1</td>
-				<td>제목</td>
-				<td>ismoon</td>
-				<td>2021.05.07</td>
-				<td>
-					<span> - </span>
-				</td>
-				<td>1</td>
-			</tr>
+			<c:if test="${ empty list }">
+				<tr>
+					<td colspan="6">
+						조회된 게시글이 없습니다.
+					</td>
+				</tr>	
+			</c:if>	
+			<c:if test="${ not empty list }">
+				<c:forEach var="board" items="${ list }">
+					<tr>
+						<td>${ board.rowNum }</td>
+						<td>
+							<a href="${ path }/board/view?no=${ board.no }">
+								${ board.title }
+							</a>
+						</td>
+						<td>${ board.writerId }</td>
+						<td>${ board.createDate }</td>
+						<td>
+							<c:if test="${ empty board.originalFileName }">
+								<span> - </span>
+							</c:if>
+							<c:if test="${ not empty board.originalFileName }">
+								<img alt="file icon" src="${ path }/resources/images/file.png" width="20px" height="20px">
+							</c:if>
+						</td>
+						<td>${ board.readCount }</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 		<div id="pageBar">
 			<!-- 맨 처음으로 -->

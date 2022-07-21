@@ -52,7 +52,7 @@ public class ListServlet extends HttpServlet {
 		// 데이터베이스에 조회되는 행 하나하나를 Board 객체로 만들어 List 객체에 담아주는 것!
 		list = new BoardService().getBoardList(pageInfo);
 		
-		System.out.println(list);
+//		System.out.println(list);
 		
 //		System.out.println(pageInfo.getCurrentPage());
 //		System.out.println(listCount);
@@ -63,6 +63,7 @@ public class ListServlet extends HttpServlet {
 //		System.out.println(pageInfo.getPrevPage());
 		
 		request.setAttribute("pageInfo", pageInfo);
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/board/list.jsp").forward(request, response);
 	}
