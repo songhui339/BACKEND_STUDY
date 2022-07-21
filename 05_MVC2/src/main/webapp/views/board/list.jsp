@@ -21,7 +21,7 @@
 	<div id="board-list-container">
 		<!-- 로그인 했을 때만 글쓰기 버튼 보여지도록 세팅 -->
 		<c:if test="${ not empty loginMember }">
-			<button type="button" id="btn-add">글쓰기</button>
+			<button type="button" onclick="location.href='${ path }/board/write'">글쓰기</button>
 		</c:if>
 
 		<table id="tbl-board">
