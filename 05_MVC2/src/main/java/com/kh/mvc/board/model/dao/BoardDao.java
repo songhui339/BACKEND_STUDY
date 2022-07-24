@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.mvc.board.model.vo.Board;
+import com.kh.mvc.board.model.vo.Reply;
 import com.kh.mvc.common.util.PageInfo;
 
 import static  com.kh.mvc.common.jdbc.JDBCTemplate.*;
@@ -245,6 +246,29 @@ public class BoardDao {
 			e.printStackTrace();
 		} finally {
 			close(pstm);
+		}
+		
+		return result;
+	}
+
+	// 게시글 댓글 작성 및 조회 로직
+	public int insertReply(Connection connection, Reply reply) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO REPLY VALUES(SEQ_REPLY_NO.NEXTVAL, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)";
+		
+		try {
+			pstmt = connection.prepareStatement(query);
+			
+			pstmt.setInt(1, reply.getBoardNo());
+			pstmt.setInt(2, reply.getWriterNo());
+			pstmt.setString(3, reply.getContent());
+			
+			result = pstmt.executeUpdate();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;

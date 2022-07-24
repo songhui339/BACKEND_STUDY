@@ -73,29 +73,30 @@
 		</table>
 		<div id="comment-container">
 	    	<div class="comment-editor">
-	    		<form action="" method="">
-	    			<input type="hidden" name="boardNo" value="">
-	    			<input type="hidden" name="writer" value="">
-					<textarea name="content" cols="55" rows="3"></textarea>
+	    		<form action="${ pageContext.request.contextPath }/board/reply" method="POST">
+	    			<input type="hidden" name="boardNo" value="${ board.no }">
+					<textarea name="content" id="replyContent" cols="55" rows="3"></textarea>
 					<button type="submit" id="btn-insert">등록</button>	    			
 	    		</form>
 	    	</div>
 	    </div>
 	    <table id="tbl-comment">
-    	   	<tr class="level1">
-	    		<td>
-	    			<sub class="comment-writer">aa</sub>
-	    			<sub class="comment-date">2021.05.07</sub>
-	    			<br>
-	    			컨텐츠
-	    		</td>
-	    		<td>
-    				<button class="btn-delete">삭제</button>
-
-	    		</td>
-	    	</tr>
+	    	<c:forEach var="reply" items="${ board.replies }">
+		    	<tr class="level1">
+		    		<td>
+		    			<sub class="comment-writer"><c:out value="${ reply.writerId }"/></sub>
+		    			<sub class="comment-date"><fmt:formatDate type="date" value="${ reply.createDate }"/></sub>
+		    			<br>
+		    			<c:out value="${ reply.content }"/>
+		    		</td>
+		    		<td>
+		    			<c:if test="${ ! empty loginMember && loginMember.id == reply.writerId }">
+	    					<button class="btn-delete">삭제</button>
+    					</c:if>
+		    		</td>
+		    	</tr>
+	    	</c:forEach>
 	    </table>
-    </div>
 </section>
 
 <script>
@@ -104,6 +105,14 @@
 			if(confirm('정말 게시글 삭제를 진행하겠습니까?')){
 				// 삭제를 하려면 게시글의 no도 같이 넘겨줘야함
 				location.replace('${ path }/board/delete?no=${ board.no }');
+			}
+		});
+		
+		$("#replyContent").on("focus", (e) => {
+			if(${ empty loginMember }) {
+				alert("로그인 후 이용해주세요!");
+				
+				$("#userId").focus();				
 			}
 		});
 	});

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.mvc.board.model.dao.BoardDao;
 import com.kh.mvc.board.model.vo.Board;
+import com.kh.mvc.board.model.vo.Reply;
 import com.kh.mvc.common.util.PageInfo;
 
 import static com.kh.mvc.common.jdbc.JDBCTemplate.*;
@@ -94,6 +95,24 @@ public class BoardService {
 		
 		close(connection);
 
+		
+		return result;
+	}
+
+	// 게시글 댓글 작성 및 조회 로직
+	public int saveReply(Reply reply) {
+		int result = 0;
+		Connection connection = getConnection();
+		
+		result = new BoardDao().insertReply(connection, reply);
+		
+		if(result > 0) {
+			commit(connection);
+		} else {
+			rollback(connection);
+		}
+		
+		close(connection);
 		
 		return result;
 	}
