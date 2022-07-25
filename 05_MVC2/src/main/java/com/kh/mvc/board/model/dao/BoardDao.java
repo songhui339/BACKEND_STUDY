@@ -250,6 +250,36 @@ public class BoardDao {
 		
 		return result;
 	}
+	
+	// 게시글 조회수 카운팅(증가) 로직 
+	public int updateReadCount(Connection connection, Board board) {
+		int result = 0;
+		PreparedStatement pstm = null;
+		String query = "UPDATE BOARD SET READCOUNT=? WHERE NO=?";
+		
+		try {
+			pstm = connection.prepareStatement(query);
+			
+			// board객체를 변경하구 페이지에도 반영되어야하기 때문에 set과 get 작업 모두 다 해야한다!
+			board.setReadCount(board.getReadCount() + 1);
+			
+			// ? 부분 채워넣기
+			pstm.setInt(1, board.getReadCount());
+			pstm.setInt(2, board.getNo());
+			
+			result = pstm.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstm);
+		}
+		
+		
+		
+		return result;
+	}
+	
 
 	// 게시글 댓글 작성 및 조회 로직
 	public int insertReply(Connection connection, Reply reply) {
@@ -273,6 +303,9 @@ public class BoardDao {
 		
 		return result;
 	}
+
+
+	
 	
 
 }

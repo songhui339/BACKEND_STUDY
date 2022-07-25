@@ -41,11 +41,23 @@ public class BoardService {
 		return list;
 	}
 
-	public Board getBoardByNo(int no) {
+	public Board getBoardByNo(int no, boolean hasRead) {
 		Board board = null;
 		Connection connection = getConnection();
 		
 		board = new BoardDao().findBoardByNo(connection, no);
+		
+		// 220725 게시글 조회수 카운팅(증가) 로직 추가
+		if(board != null && !hasRead) {
+			int result = new BoardDao().updateReadCount(connection, board);
+			
+			if(result > 0) {
+				// 테이블에 반영 
+				commit(connection);
+			} else {
+				rollback(connection);
+			}
+		}
 		
 		close(connection);
 		

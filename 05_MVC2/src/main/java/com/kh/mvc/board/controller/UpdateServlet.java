@@ -30,7 +30,7 @@ public class UpdateServlet extends HttpServlet {
     	System.out.println("게시글 번호 : " + no);
 		
 //		조회한 객체를 board에 전달
-		board = new BoardService().getBoardByNo(no);
+		board = new BoardService().getBoardByNo(no, true);
 		
 		request.setAttribute("board", board);
 		request.getRequestDispatcher("/views/board/update.jsp").forward(request, response);
