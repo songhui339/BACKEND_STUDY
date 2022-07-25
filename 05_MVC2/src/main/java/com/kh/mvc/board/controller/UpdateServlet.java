@@ -1,5 +1,6 @@
 package com.kh.mvc.board.controller;
 
+import java.io.File;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,8 +62,32 @@ public class UpdateServlet extends HttpServlet {
     	board.setWriterId(mr.getParameter("writer"));
     	board.setContent(mr.getParameter("content"));
     	
-    	board.setOriginalFileName(mr.getParameter("originalFileName"));
-    	board.setRenamedFileName(mr.getParameter("renamedFileName"));
+    	
+    	
+    	// 220725 1교시때 작성한 내용 
+    	// 업로드하는 파일이 없으면 mutlipartrequest에 전달 혹은 존재하는 내용 없음!
+    	String originalFileName = mr.getOriginalFileName("upfile");
+    	String filesystemName = mr.getFilesystemName("upfile");
+    	
+    	System.out.println(originalFileName);
+    	System.out.println(filesystemName);
+    	
+    	// 사용자가 파일을 upload하면~ 조건문 
+    	if (originalFileName != null && !originalFileName.equals("")) {
+    		// 파일이 수정되면 기존 파일 삭제하는 로직
+    		// 실무에서는 임시 폴더로 옮기도록 세팅하구 정기적으로 삭제한다.
+    		File file = new File(path + "/" + mr.getParameter("renamedFileName"));
+    		
+    		if (file.exists()) {
+				file.delete();
+			}
+    		
+    		board.setOriginalFileName(originalFileName);
+        	board.setRenamedFileName(filesystemName);
+    	} else {
+    		board.setOriginalFileName(mr.getParameter("originalFileName"));
+        	board.setRenamedFileName(mr.getParameter("renamedFileName"));
+    	}
     	
     	result = new BoardService().save(board);
     	

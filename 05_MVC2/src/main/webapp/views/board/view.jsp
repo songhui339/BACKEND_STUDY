@@ -52,7 +52,10 @@
 					</c:if>
 					<c:if test="${ not empty board.originalFileName }">
 						<img alt="file icon" src="${ path }/resources/images/file.png" width="20px" height="20px">
-						<span>${ board.originalFileName }</span>
+						<!-- 220725 파일 다운로드 로직 구현 -->
+						<a href="javascript:" id="fileDown">
+							<span>${ board.originalFileName }</span>
+						</a>
 					</c:if>
 				</td>
 			</tr>
@@ -106,6 +109,11 @@
 				// 삭제를 하려면 게시글의 no도 같이 넘겨줘야함
 				location.replace('${ path }/board/delete?no=${ board.no }');
 			}
+		});
+		
+		// 파일 다운로드 앵커태그 기능 구현 
+		$("#fileDown").on("click", () => {
+			location.assign("${ path }/board/fileDown?oname=${ board.originalFileName }&rname=${ board.renamedFileName}")
 		});
 		
 		$("#replyContent").on("focus", (e) => {
