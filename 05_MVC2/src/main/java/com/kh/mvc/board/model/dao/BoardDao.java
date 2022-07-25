@@ -147,6 +147,7 @@ public class BoardDao {
 				board.setOriginalFileName(rs.getString("ORIGINAL_FILENAME"));
 				board.setRenamedFileName(rs.getString("RENAMED_FILENAME"));
 				board.setContent(rs.getString("CONTENT"));
+				// 댓글 조회
 				board.setCreateDate(rs.getDate("CREATE_DATE"));
 				board.setModifyDate(rs.getDate("MODIFY_DATE"));
 			}

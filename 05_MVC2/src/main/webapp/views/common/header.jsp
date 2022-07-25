@@ -70,7 +70,9 @@
 				<!-- "/" -> tomcat 루트로 되어 있는 것  -->
 				<li class="home"><a href="${ path }/">Home</a></li>
 				<li id="board"><a href="${ path }/board/list">게시판</a></li>
-				<li id="admin-member"><a href="${ path }/">회원관리</a></li>
+				<c:if test="${ not empty loginMember && loginMember.role == 'ROLE_ADMIN'}">
+					<li id="admin-member"><a href="${ path }/admin/members">회원관리</a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</header> 
