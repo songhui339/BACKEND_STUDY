@@ -56,6 +56,11 @@
 						<a href="javascript:" id="fileDown">
 							<span>${ board.originalFileName }</span>
 						</a>
+						<%-- 
+						<!-- 개인정보 관련 파일은 아래와 같이 다운로드 되도록 연결하면 안됨!!! 절대 안됨!!! -->
+						<br><a href="${ path }/resources/upload/board${ board.renamedFileName }"
+							download=${ board.originalFileName }>웹 루트에 파일 다운</a>
+						 --%>
 					</c:if>
 				</td>
 			</tr>
@@ -113,7 +118,7 @@
 		
 		// 파일 다운로드 앵커태그 기능 구현 
 		$("#fileDown").on("click", () => {
-			location.assign("${ path }/board/fileDown?oname=${ board.originalFileName }&rname=${ board.renamedFileName}")
+			location.assign("${ path }/board/fileDown?oname=${ board.originalFileName }&rname=${ board.renamedFileName }")
 		});
 		
 		$("#replyContent").on("focus", (e) => {
